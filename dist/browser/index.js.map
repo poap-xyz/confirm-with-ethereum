@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":["default","sign_action","confirm_action"],"sources":["../../src/index.js"],"sourcesContent":["export { default as sign_action } from './modules/sign'\nexport { default as confirm_action } from './modules/verify'"],"mappings":"AAAA,SAASA,OAAO,IAAIC,WAAW,QAAQ,gBAAgB;AACvD,SAASD,OAAO,IAAIE,cAAc,QAAQ,kBAAkB"}

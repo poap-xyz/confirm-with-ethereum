@@ -1,0 +1,10 @@
+node_modules
+.github
+.nvmrc
+preview
+.vscode
+.husky
+docs/
+src/
+screenshots/
+.babelrc

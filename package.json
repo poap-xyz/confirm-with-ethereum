@@ -1,0 +1,32 @@
+{
+  "name": "@poap/confirm-with-ethereum",
+  "version": "0.0.1",
+  "description": "Confirm an action with an EVM compatible wallet",
+  "main": "./dist/node/index.js",
+  "browser": "./dist/browser/index.js",
+  "module": "./dist/module/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-browser": "BABEL_ENV=browser babel ./src --out-dir ./dist/browser --source-maps --copy-files",
+    "build-module": "BABEL_ENV=module babel ./src --out-dir ./dist/module --source-maps --copy-files",
+    "build-node": "babel ./src --out-dir ./dist/node --source-maps --copy-files",
+    "build": "npm run build-node && npm run build-browser && npm run build-module",
+    "prepare": "husky install",
+    "lint": "eslint --fix src"
+  },
+  "author": "Mentor <mentor@palokaj.co> (http://github.com/actuallymentor)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
+    "@poap/skunk-linter": "^0.0.2",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2"
+  }
+}

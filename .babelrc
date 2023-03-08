@@ -1,0 +1,44 @@
+// Based on https://gist.github.com/ncochard/6cce17272a069fdb4ac92569d85508f4
+{
+    "env": {
+        "development": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "node": "6.10"
+                        }
+                    }
+                ]
+            ]
+        },
+        "browser": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "browsers": "last 2 versions, ie 10-11"
+                        },
+                        "modules": false
+                    }
+                ]
+            ]
+        },
+        "module": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "node": "6.10"
+                        },
+                        "modules": false
+                    }
+                ]
+            ]
+        }
+    },
+    "sourceMaps": true
+}
