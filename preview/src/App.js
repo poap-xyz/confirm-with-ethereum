@@ -42,7 +42,7 @@ function App() {
 
   async function do_signing() {
 
-    const signed_action = await sign_action( example_action, signer, "The intention of this signature is to show you what action signatures look like" )
+    const signed_action = await sign_action( example_action, signer, "👋 The intention of this signature is to show you what action signatures look like. Here you can describe to your user what the signature is for, so it doesn't look so intimidating.\n\n Below the line of # is the actual object the verify function will output." )
     console.log( `Signed action: `, signed_action )
 
     set_signature( signed_action )

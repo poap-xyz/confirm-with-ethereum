@@ -1,6 +1,6 @@
 # Cowe: confirm with Ethereum
 
-A convenience library for developers allowing for easy signing of action intents and verifying them in a node.js backend. Actions are always Javascript `Object`s.
+<img width="300px" align="right" src="./screenshots/metamask-screenshot.png"/>A convenience library for developers allowing for easy signing of action intents and verifying them in a node.js backend. Actions are always Javascript `Object`s.
 
 A live preview of this module in action can be found [here](https://poap-xyz.github.io/confirm-with-ethereum/).
 
