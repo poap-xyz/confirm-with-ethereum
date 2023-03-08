@@ -2,7 +2,9 @@
 
 A convenience library for developers allowing for easy signing of action intents and verifying them in a node.js backend. Actions are always Javascript `Object`s.
 
-You can preview what the data in and outputs look like by running:
+A live preview of this module in action can be found [here](https://poap-xyz.github.io/confirm-with-ethereum/).
+
+You can preview what the data in and outputs look like locally by running:
 
 ```shell
 cd preview
