@@ -32,11 +32,12 @@ import { sign_action } from '@poap/confirm-with-ethereum'
 const signer = window.provider.getSigner() || useSigner()
 
 // Specify a json object that contains the action data your backend needs
+// The below structure and content is arbitrary, you can specify any object
 const action = {
     intent: 'update_profile',
     payload: {
         name: 'vitalik',
-        groups: [ 'chads', 'probably human' ]
+        groups: [ 1, 5 ]
     }
 }
 
@@ -59,10 +60,10 @@ exports.receive_on_backend = signed_action => {
     try {
 
         // Check if the action is valid (ie signed by the wallet it claims to be sent by)
-        const { action_json, address } = confirm_action( signed_action )
+        const { action, address, timestamp } = confirm_action( signed_action )
 
-        // Check if the signature is not too old
-        const { payload, timestamp } = action_json
+        // Note that this is the content of the object we provided at sign_action
+        const { payload, intent } = action
 
         // Check if signature is older than a minute and exit if so
         if( timestamp < ( Date.now() - 1000 * 60 ) ) throw new Error( "Signature is older than a minute" )
