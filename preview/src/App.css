@@ -1,0 +1,27 @@
+body {
+    padding: 2rem;
+}
+
+body * {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+h3 {
+    margin: 2rem 0;
+}
+
+button {
+    margin-top: 4rem;
+    border: none;
+    background: black;
+    color: white;
+    padding: 1rem 2rem;
+}
+
+pre {
+    background: rgba(0, 0, 0, .1);
+    padding: 0.5rem;
+    font-family: monospace;
+    overflow: scroll;
+}
