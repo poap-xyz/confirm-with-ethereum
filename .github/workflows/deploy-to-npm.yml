@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "package.json"
+      - ".github/workflows/deploy-to-npm.yml"
 
 jobs:
   # Build the frontend giles
@@ -27,6 +28,10 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Install preview dependencies
+        run: npm ci
+        working-directory: preview
 
       - name: Build module files
         run: npm run build
