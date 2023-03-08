@@ -18,19 +18,19 @@ function App() {
 
   const [ signer, set_signer ] = useState( undefined )
   const [ signature, set_signature ] = useState(  )
+  const [ connected, set_connected ] = useState(  )
 
   console.log( `Wallet connected: ${ !!signer }, signer: `, signer )
 
-  useEffect( () => {
-
-    window.ethereum.request( { method: 'eth_accounts' } ).then( accounts => {
-      if( !accounts.length ) return alert( `Connect wallet please` )
+  function connect_and_get_procider() {
+    window.ethereum.request( { method: 'eth_requestAccounts' } ).then( accounts => {
+      if( !accounts.length ) return console.log( `Not connected to wallet` )
       const provider = new ethers.providers.Web3Provider( window.ethereum, "any")
       const signer = provider.getSigner()
       set_signer( signer )
+      set_connected( true )
     } )
-
-  }, [] )
+  }
 
   useEffect( () => {
 
@@ -64,8 +64,8 @@ function App() {
         <Json>
           { signature ? JSON.stringify( confirm_action( signature ), null, 2 ) : 'waiting for signature...' }
         </Json>
-        <button onClick={ do_signing } >
-          Sign action
+        <button onClick={ connected ? do_signing : connect_and_get_procider } >
+          { connected ? 'Sign action' : 'Connect wallet' }
         </button>
       </header>
     </div>
