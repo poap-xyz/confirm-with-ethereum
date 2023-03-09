@@ -52,7 +52,7 @@ jobs:
           git checkout main
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f docs
+          git add -f docs/*
           git commit -am "🤖 Automated docs file compilation" || exit 0
-          git remote set-url --push origin https://$USERNAME:$GITHUB_TOKEN@github.com/$REPONAME
+          git remote set-url --push origin https://$USERNAME:$GITHUB_TOKEN@github.com/$REPO_NAME
           git push
