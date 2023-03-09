@@ -41,6 +41,7 @@ function App() {
 
     if( !signature ) return
     const extracted_data = confirm_action( signature )
+    
     console.log( `Data from action signature: `, extracted_data )
 
   }, [ signature ] )
