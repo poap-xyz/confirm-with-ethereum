@@ -1,0 +1,52 @@
+name: Deploy to preview channel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
+      - "preview"
+      - ".github/workflows/deploy-to-preview.yml"
+
+jobs:
+  # Deploy npm module
+  deploy-module-preview:
+    name: Deploy changes to GitHub Pages
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Environment and dependency setup
+      - name: Cloning repository
+        uses: actions/checkout@v1
+
+      - name: Set up Node.js (.nvmrc)
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      # install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install preview dependencies
+        run: npm ci
+        working-directory: preview
+
+      - name: Build module files
+        run: npm run build
+
+      # Deploy preview page
+      - name: Build preview files
+        run: npm run build
+        working-directory: preview
+
+      - name: Commit new files if needed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f dist docs
+          git commit -am "🤖 Automated dist and docs file compilation" || exit 0
+          git push
