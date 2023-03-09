@@ -7,7 +7,7 @@ on:
     paths:
       - "package.json"
       - "preview"
-      - ".github/workflows/deploy-to-preview.yml"
+      - ".github/workflows/deploy-preview.yml"
 
 jobs:
   # Deploy npm module
