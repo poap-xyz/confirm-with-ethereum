@@ -8,6 +8,11 @@ const example_action = {
   data: 12
 }
 
+/**
+ * It takes a JSON object as a child, stringifies it, and then replaces all escaped quotes with regular
+ * quotes, all escaped newlines with regular newlines, and all escaped opening and closing curly braces
+ * with regular opening and closing curly braces
+ */
 const Json = ( { children, ...props } ) => <pre>
   <code>
     { JSON.stringify( children, null, 2 ).replace( /\\"/ig, `"` ).replace( /(?<!\\)\\n/ig, `\n` ).replace( '"{', "{" ).replace( '}"', "}" ) }

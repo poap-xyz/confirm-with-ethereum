@@ -10,19 +10,11 @@ const verify_message = ({
 }) => {
   try {
     log(`Verifying claimed message `, claimed_message, ` on behalf of `, address);
-
-    // Check that the signed message equals the claimed message
     let confirmed_signatory = utils.verifyMessage(claimed_message, signature);
-
-    // Normalisations
     confirmed_signatory = normalize_string(confirmed_signatory);
     address = normalize_string(address);
-
-    // Verify that the claimed signatory is the one that signed the message
     const message_valid = confirmed_signatory === address;
     log(`Message was signed by ${confirmed_signatory}, valid: `, message_valid);
-
-    // Verify that the claimed signatory is the one that signed the message
     return message_valid;
   } catch (e) {
     log(`Verification error: `, e);
@@ -46,12 +38,9 @@ const verify_message = ({
 * @returns {ConfirmedAction} - a confirmed action object
 */
 export default function confirm_action(signed_message, throw_on_fail = true) {
-  // Check if the signed message is valid
   const is_valid = verify_message(signed_message);
   if (!is_valid && throw_on_fail) throw new Error(`This message is NOT valid`);
   if (!is_valid && !throw_on_fail) return undefined;
-
-  // Parse message if it was valid
   const {
     claimed_message,
     address
@@ -62,8 +51,6 @@ export default function confirm_action(signed_message, throw_on_fail = true) {
       timestamp
     } = _JSON$parse,
     action = _objectWithoutProperties(_JSON$parse, _excluded);
-
-  // Return the parsed json
   return {
     action,
     address,

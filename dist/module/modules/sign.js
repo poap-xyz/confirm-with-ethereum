@@ -33,53 +33,30 @@ export default function sign_action(_x, _x2, _x3) {
 }
 function _sign_action() {
   _sign_action = _asyncToGenerator(function* (action, signer, message_prompt, add_timestamp = true) {
-    // Desctucture message
     if (!action) throw new Error(`Please specify what action you want signed`);
     log(`Requesting signature for: `, action);
     if (message_prompt) log(`Message prompt: `, message_prompt);
-
-    // Check that we have a valid signer to work with
     if (!signer) throw new Error(`No signer specified, are you connected to your wallet?`);
-
-    // Get the address from the signer
     let address = yield signer.getAddress();
-
-    /* ///////////////////////////////
-    // Validations and normalisations */
-
-    // Make sure address is valid, lowercase, and trimmed
     if (!address) throw new Error(`Please specify what address you expect to sign this message`);
     address = normalize_string(address);
     if (!address.match(eth_address_regex)) throw new Error(`${address} is not a valid Ethereum address`);
-
-    // Check that input it a valid js object
     try {
       action = JSON.parse(JSON.stringify(action));
     } catch (e) {
       throw new Error(`message format is not JSON`);
     }
-
-    /* ///////////////////////////////
-    // Generate user-friendly message */
-
-    // Add timestamp to message
     if (add_timestamp) action = _objectSpread(_objectSpread({}, action), {}, {
       timestamp: Date.now()
     });
-
-    // Format user-friendly message
     const stringified_action = JSON.stringify(action, null, 2);
     let claimed_message = stringified_action;
     if (message_prompt) {
       claimed_message = commented_text(message_prompt);
       claimed_message += stringified_action;
     }
-
-    // Sign the message
     log(`Triggering signing of: `, claimed_message);
     const signature = yield signer.signMessage(claimed_message);
-
-    // Format the signature with it's message and claimed recipient
     const formatted_signature = {
       claimed_message,
       signature,

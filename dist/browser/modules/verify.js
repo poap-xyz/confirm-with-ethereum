@@ -9,19 +9,11 @@ var verify_message = function verify_message(_ref) {
     address = _ref.address;
   try {
     log("Verifying claimed message ", claimed_message, " on behalf of ", address);
-
-    // Check that the signed message equals the claimed message
     var confirmed_signatory = utils.verifyMessage(claimed_message, signature);
-
-    // Normalisations
     confirmed_signatory = normalize_string(confirmed_signatory);
     address = normalize_string(address);
-
-    // Verify that the claimed signatory is the one that signed the message
     var message_valid = confirmed_signatory === address;
     log("Message was signed by ".concat(confirmed_signatory, ", valid: "), message_valid);
-
-    // Verify that the claimed signatory is the one that signed the message
     return message_valid;
   } catch (e) {
     log("Verification error: ", e);
@@ -46,20 +38,15 @@ var verify_message = function verify_message(_ref) {
 */
 export default function confirm_action(signed_message) {
   var throw_on_fail = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  // Check if the signed message is valid
   var is_valid = verify_message(signed_message);
   if (!is_valid && throw_on_fail) throw new Error("This message is NOT valid");
   if (!is_valid && !throw_on_fail) return undefined;
-
-  // Parse message if it was valid
   var claimed_message = signed_message.claimed_message,
     address = signed_message.address;
   var sanetised_message = remove_comments(claimed_message);
   var _JSON$parse = JSON.parse(sanetised_message),
     timestamp = _JSON$parse.timestamp,
     action = _objectWithoutProperties(_JSON$parse, _excluded);
-
-  // Return the parsed json
   return {
     action: action,
     address: address,

@@ -16,19 +16,11 @@ const verify_message = ({
 }) => {
   try {
     (0, _helpers.log)(`Verifying claimed message `, claimed_message, ` on behalf of `, address);
-
-    // Check that the signed message equals the claimed message
     let confirmed_signatory = _ethers.utils.verifyMessage(claimed_message, signature);
-
-    // Normalisations
     confirmed_signatory = (0, _helpers.normalize_string)(confirmed_signatory);
     address = (0, _helpers.normalize_string)(address);
-
-    // Verify that the claimed signatory is the one that signed the message
     const message_valid = confirmed_signatory === address;
     (0, _helpers.log)(`Message was signed by ${confirmed_signatory}, valid: `, message_valid);
-
-    // Verify that the claimed signatory is the one that signed the message
     return message_valid;
   } catch (e) {
     (0, _helpers.log)(`Verification error: `, e);
@@ -52,12 +44,9 @@ const verify_message = ({
 * @returns {ConfirmedAction} - a confirmed action object
 */
 function confirm_action(signed_message, throw_on_fail = true) {
-  // Check if the signed message is valid
   const is_valid = verify_message(signed_message);
   if (!is_valid && throw_on_fail) throw new Error(`This message is NOT valid`);
   if (!is_valid && !throw_on_fail) return undefined;
-
-  // Parse message if it was valid
   const {
     claimed_message,
     address
@@ -68,8 +57,6 @@ function confirm_action(signed_message, throw_on_fail = true) {
       timestamp
     } = _JSON$parse,
     action = _objectWithoutProperties(_JSON$parse, _excluded);
-
-  // Return the parsed json
   return {
     action,
     address,
