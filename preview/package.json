@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://poap-xyz.github.io/confirm-with-ethereum/",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "ethers": "^5.7.2",
+  "peerDependencies": {
+    "ethers": "^5.7.2"
+  },
+  "devDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
