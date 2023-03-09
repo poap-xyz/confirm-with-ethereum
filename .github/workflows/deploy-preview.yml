@@ -45,6 +45,7 @@ jobs:
 
       - name: Commit new files if needed
         run: |
+          git checkout main
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -f dist docs
