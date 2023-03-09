@@ -44,10 +44,15 @@ jobs:
         working-directory: preview
 
       - name: Commit new files if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_NAME: ${{ github.action_repository }}
+          USERNAME: ${{ github.actor }}
         run: |
           git checkout main
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f dist docs
-          git commit -am "🤖 Automated dist and docs file compilation" || exit 0
+          git add -f docs
+          git commit -am "🤖 Automated docs file compilation" || exit 0
+          git remote set-url --push origin https://$USERNAME:$GITHUB_TOKEN@github.com/$USERNAME/$REPONAME
           git push
