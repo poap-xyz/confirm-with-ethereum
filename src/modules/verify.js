@@ -1,5 +1,5 @@
-import { log, remove_comments, normalize_string } from "./helpers"
-import { utils } from 'ethers'
+const { log, remove_comments, normalize_string } = require( "./helpers" )
+const { utils } = require( 'ethers' )
 
 const verify_message = ( { claimed_message, signature, address } ) => {
 
@@ -48,7 +48,7 @@ const verify_message = ( { claimed_message, signature, address } ) => {
 * @param {String} signed_message.signature - the signature the user provided
 * @returns {ConfirmedAction} - a confirmed action object
 */
-export default function confirm_action ( signed_message, throw_on_fail=true ) {
+module.exports = function confirm_action ( signed_message, throw_on_fail=true ) {
 
     // Check if the signed message is valid
     const is_valid = verify_message( signed_message )

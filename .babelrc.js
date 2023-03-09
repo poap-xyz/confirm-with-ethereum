@@ -12,13 +12,26 @@ module.exports = {
 
     },
     "env": {
+        "development": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "targets": {
+                            "browsers": "last 2 Chrome versions"
+                        },
+                        "modules": false
+                    }
+                ]
+            ]
+        },
         "browser": {
             "presets": [
                 [
                     "@babel/preset-env",
                     {
                         "targets": {
-                            "browsers": "last 2 versions, ie 10-11"
+                            "browsers": "last 2 versions"
                         },
                         "modules": false
                     }

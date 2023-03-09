@@ -1,4 +1,4 @@
-import { eth_address_regex, log, normalize_string, commented_text } from './helpers'
+const { eth_address_regex, log, normalize_string, commented_text } = require( './helpers' ) 
 
 /**
 * The return object of a signed action
@@ -9,14 +9,14 @@ import { eth_address_regex, log, normalize_string, commented_text } from './help
 */
 
 /**
-* Action-signing function that decorates the action for user friendliness
+* @function sign_action - Action-signing function that decorates the action for user friendliness
 * @param {Object} action - an object containing the data you want to send along with this action
 * @param {String} [message_prompt] - a message describing what this action signature is for, it will be shown to the user but entirely disregarded by the action verification
 * @param {Object} signer - the signer of the currently connected wallet, see https://docs.ethers.org/v5/api/signer/
 * @param {Boolean} add_timestamp - whether to add a timestamp to the signature
 * @returns {SignedAction} signed action object
 */
-export default async function sign_action( action, signer, message_prompt, add_timestamp=true ) {
+module.exports = async function sign_action( action, signer, message_prompt, add_timestamp=true ) {
 
     // Desctucture message
     if( !action ) throw new Error( `Please specify what action you want signed` )

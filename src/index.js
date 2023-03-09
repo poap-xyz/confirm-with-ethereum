@@ -1,5 +1,7 @@
-export { default as sign_action } from './modules/sign'
-export { default as confirm_action } from './modules/verify'
+const sign_action = require( './modules/sign' )
+const confirm_action = require( './modules/verify' )
 
-// import { confirm_action } from '../dist/module/index'
-// confirm_action(  )
+module.exports = {
+    confirm_action,
+    sign_action
+}
