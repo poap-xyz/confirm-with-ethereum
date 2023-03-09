@@ -12,18 +12,6 @@ module.exports = {
 
     },
     "env": {
-        "development": {
-            "presets": [
-                [
-                    "@babel/preset-env",
-                    {
-                        "targets": {
-                            "node": "6.10"
-                        }
-                    }
-                ]
-            ]
-        },
         "browser": {
             "presets": [
                 [

@@ -32,13 +32,14 @@ const verify_message = ( { claimed_message, signature, address } ) => {
 
 }
 
-/**
+/** 
 * Return object of the action confirmation function
 * @typedef {Object} ConfirmedAction 
 * @property {Object} action - the javascript object that was submitted with the sign_action function
 * @property {String} address - the address of the signer, normalised to lowercase
 * @property {Number} timestamp - the timestamp at which this signature was created 
 */
+
 /**
 * Verify that a signature is valid, and parse it's json
 * @param {Object} signed_message - a formatted message as created by the frontend sign_message function

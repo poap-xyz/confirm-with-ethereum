@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "copy": "rm -rf ./src/dist && cp -r ../dist ./src/dist",
+    "copy": "mkdir -p node_modules/confirm-with-ethereum && rm -rf ./node_modules/confirm-with-ethereum/* && cp -r ../dist ../package.json ./node_modules/confirm-with-ethereum/",
     "start": "npm run copy && DISABLE_ESLINT_PLUGIN=true react-scripts start",
     "build": "npm run copy && DISABLE_ESLINT_PLUGIN=true react-scripts build && rm -rf ../docs && cp -r build ../docs",
     "test": "react-scripts test",

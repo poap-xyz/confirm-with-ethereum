@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
-import { sign_action, confirm_action } from './dist/browser/index.js'
+import { sign_action, confirm_action } from 'confirm-with-ethereum'
 
 const example_action = {
   intent: 'do things',
@@ -27,7 +27,7 @@ function App() {
 
   console.log( `Wallet connected: ${ !!signer }, signer: `, signer )
 
-  function connect_and_get_procider() {
+  function connect_and_get_provider() {
     window.ethereum.request( { method: 'eth_requestAccounts' } ).then( accounts => {
       if( !accounts.length ) return console.log( `Not connected to wallet` )
       const provider = new ethers.providers.Web3Provider( window.ethereum, "any")
@@ -69,7 +69,7 @@ function App() {
         <Json>
           { signature ? JSON.stringify( confirm_action( signature ), null, 2 ) : 'waiting for signature...' }
         </Json>
-        <button onClick={ connected ? do_signing : connect_and_get_procider } >
+        <button onClick={ connected ? do_signing : connect_and_get_provider } >
           { connected ? 'Sign action' : 'Connect wallet' }
         </button>
       </header>

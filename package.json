@@ -1,16 +1,15 @@
 {
   "name": "@poap/confirm-with-ethereum",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Confirm an action with an EVM compatible wallet",
-  "main": "./dist/node/index.js",
+  "main": "./dist/module/index.js",
   "browser": "./dist/browser/index.js",
   "module": "./dist/module/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-browser": "BABEL_ENV=browser babel ./src --out-dir ./dist/browser --source-maps --copy-files",
     "build-module": "BABEL_ENV=module babel ./src --out-dir ./dist/module --source-maps --copy-files",
-    "build-node": "babel ./src --out-dir ./dist/node --source-maps --copy-files",
-    "build": "npm run build-node && npm run build-browser && npm run build-module",
+    "build": "npm run build-browser && npm run build-module",
     "prepare": "husky install",
     "lint": "eslint --fix src"
   },

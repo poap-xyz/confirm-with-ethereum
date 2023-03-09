@@ -9,8 +9,8 @@ on:
       - ".github/workflows/deploy-to-npm.yml"
 
 jobs:
-  # Build the frontend giles
-  build:
+  # Deploy npm module
+  deploy-npm-module:
     name: Deploy changes to npm
 
     runs-on: ubuntu-latest
@@ -26,6 +26,7 @@ jobs:
           node-version-file: ".nvmrc"
           cache: "npm"
 
+      # install dependencies
       - name: Install dependencies
         run: npm ci
 
@@ -36,6 +37,13 @@ jobs:
       - name: Build module files
         run: npm run build
 
+      - name: "Publish to NPM"
+        run: |
+          npm publish --access public
+        env:
+          NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+
+      # Deploy preview page
       - name: Build preview files
         run: npm run build
         working-directory: preview
@@ -46,9 +54,3 @@ jobs:
           git config --local user.name "GitHub Action"
           git add -f dist docs
           git commit -am "🤖 Automated dist and docs file compilation" || exit 0
-
-      - name: "Publish to NPM"
-        run: |
-          npm publish --access public
-        env:
-          NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}

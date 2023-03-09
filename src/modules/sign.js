@@ -1,4 +1,4 @@
-const { eth_address_regex, log, normalize_string, commented_text } = require( './helpers' )
+import { eth_address_regex, log, normalize_string, commented_text } from './helpers'
 
 /**
 * The return object of a signed action
