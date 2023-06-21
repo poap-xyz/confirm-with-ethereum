@@ -28,12 +28,9 @@ module.exports = async function sign_action( action, signer, message_prompt, add
     if( !signer ) throw new Error( `No signer specified, are you connected to your wallet?` )
 
     // Get the address from the signer
-    let address = await Promise.any( [
-        // Ethers format: https://docs.ethers.org/v5/api/utils/address/
-        signer.getAddress(),
-        // Wagmi/viem format: https://viem.sh/docs/actions/wallet/getAddresses.html
-        signer.getAddresses()
-    ] )
+    let address = await signer?.getAddress?.() // signer.getAddress(),
+    if( !address ) [ address ] = await signer?.getAddresses?.() || [] // // Wagmi/viem format: https://viem.sh/docs/actions/wallet/getAddresses.html
+    if( !address ) throw new Error( `No address found for signer` )
 
     /* ///////////////////////////////
     // Validations and normalisations */
