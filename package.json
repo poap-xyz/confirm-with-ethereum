@@ -1,6 +1,6 @@
 {
   "name": "@poap/confirm-with-ethereum",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Confirm an action with an EVM compatible wallet",
   "main": "./dist/development/index.js",
   "browser": "./dist/browser/index.js",
