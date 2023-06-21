@@ -63,7 +63,18 @@ module.exports = async function sign_action( action, signer, message_prompt, add
 
     // Sign the message
     log( `Triggering signing of: `, claimed_message )
-    const signature = await signer.signMessage( claimed_message )
+
+    // Try to sign with ethers format: https://docs.ethers.org/v5/api/signer/
+    let signature = await signer.signMessage( claimed_message ).catch( e => {
+        log( `Unable to sign using ethers.js format: `, e )
+        return undefined
+    } )
+
+    // Try to sign with viem format: https://viem.sh/docs/actions/wallet/signMessage.html
+    if( !signature ) signature = await signer.signMessage( {
+        account: address,
+        message: claimed_message
+    } )
 
     // Format the signature with it's message and claimed recipient
     const formatted_signature = {
